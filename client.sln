@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InWorldz.Whip.Client", "client\InWorldz.Whip.Client.csproj", "{D77BEB25-D3D4-4EC8-B00F-C1A9EA9F1EE1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "whipclone", "whipclone\whipclone.csproj", "{04295CBD-FBF5-4C9D-90C3-FEC94D2ACB0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "whipstress", "whipstress\whipstress.csproj", "{F349A920-759F-412C-8ED7-F7D3DB4D609D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D77BEB25-D3D4-4EC8-B00F-C1A9EA9F1EE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D77BEB25-D3D4-4EC8-B00F-C1A9EA9F1EE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D77BEB25-D3D4-4EC8-B00F-C1A9EA9F1EE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D77BEB25-D3D4-4EC8-B00F-C1A9EA9F1EE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04295CBD-FBF5-4C9D-90C3-FEC94D2ACB0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04295CBD-FBF5-4C9D-90C3-FEC94D2ACB0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04295CBD-FBF5-4C9D-90C3-FEC94D2ACB0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04295CBD-FBF5-4C9D-90C3-FEC94D2ACB0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F349A920-759F-412C-8ED7-F7D3DB4D609D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F349A920-759F-412C-8ED7-F7D3DB4D609D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F349A920-759F-412C-8ED7-F7D3DB4D609D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F349A920-759F-412C-8ED7-F7D3DB4D609D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
