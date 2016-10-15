@@ -153,7 +153,8 @@ namespace InWorldz.Whip.Client
 
         private void Disconnect()
         {
-            _conn.Disconnect(false);
+            _conn.Shutdown(SocketShutdown.Both);
+            _conn.Close();
         }
 
         /// <summary>
