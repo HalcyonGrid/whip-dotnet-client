@@ -27,7 +27,8 @@ namespace InWorldz.Whip.Client
             TEST = 13,
             MAINT_PURGELOCALS = 14,
             STATUS_GET = 15,
-            STORED_ASSET_IDS_GET = 16
+            STORED_ASSET_IDS_GET = 16,
+            GET_DONTCACHE = 17,
         }
 
         public RequestType Type
