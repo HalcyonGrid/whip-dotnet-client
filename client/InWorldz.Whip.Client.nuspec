@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>InWorldz.Whip.Client</id>
-    <version>1.0.1</version>
+    <version>$version$</version>
     <title>WHIP Client for .NET</title>
     <authors>David Daeschler</authors>
     <owners>David Daeschler, Ricky Curtice</owners>
@@ -11,6 +11,5 @@
     <description>Client library to access the WHIP asset server from .NET</description>
     <copyright>Copyright 2017</copyright>
     <tags>Halcyon InWorldz WHIP</tags>
-    <releaseNotes>Reduced .NET framework to 4.5 to maintain compatability with existing dependent projects that cannot change at this time.</releaseNotes>
   </metadata>
 </package>
