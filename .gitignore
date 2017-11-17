@@ -251,3 +251,6 @@ bin4
 *.oar
 bin/blacklist.old
 bin/blacklist.txt
+
+whipclone/docs
+whipstress/docs
