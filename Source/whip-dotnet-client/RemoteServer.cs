@@ -292,9 +292,10 @@ namespace InWorldz.Whip.Client
         private void Connect()
         {
             const int BUF_SZ = 65536;
-            _conn = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            _conn.ReceiveBufferSize = BUF_SZ;
-            _conn.SendBufferSize = BUF_SZ;
+            _conn = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp) {
+                ReceiveBufferSize = BUF_SZ,
+                SendBufferSize = BUF_SZ,
+            };
 
             //establish a socket connection
             _conn.Connect(_hostName, _port);

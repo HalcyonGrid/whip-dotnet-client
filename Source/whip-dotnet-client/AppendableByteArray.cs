@@ -96,7 +96,8 @@ namespace InWorldz.Whip.Client
             while (soFar < size)
             {
                 int szRead = conn.Receive(this.data, _insertPos, size - soFar, SocketFlags.None);
-                if (szRead == 0) throw new AssetServerError("Server disconnect during receive");
+                if (szRead == 0)
+                    throw new AssetServerError("Server disconnect during receive");
 
                 soFar += szRead;
                 _insertPos += szRead;
