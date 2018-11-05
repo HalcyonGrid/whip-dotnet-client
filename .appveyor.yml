@@ -62,6 +62,7 @@ for:
 after_build:
 - ps: Set-Location "$env:APPVEYOR_BUILD_FOLDER"
 - ps: Rename-Item -Path bin -NewName whip-dotnet-client-$(APPVEYOR_BUILD_VERSION)-$(APPVEYOR_REPO_BRANCH)-$(EDITION)
+- ps: Rename-Item -Path utilbin -NewName whip-utils-$(APPVEYOR_BUILD_VERSION)-$(APPVEYOR_REPO_BRANCH)-$(EDITION)
 
 # No tests for now.
 test: off
@@ -70,12 +71,15 @@ artifacts:
 - path: whip-dotnet-client-$(APPVEYOR_BUILD_VERSION)-$(APPVEYOR_REPO_BRANCH)-$(EDITION)
   name: whip-dotnet-client-$(APPVEYOR_BUILD_VERSION)-$(APPVEYOR_REPO_BRANCH)-$(EDITION)
   type: zip
+- path: whip-utils-$(APPVEYOR_BUILD_VERSION)-$(APPVEYOR_REPO_BRANCH)-$(EDITION)
+  name: whip-utils-$(APPVEYOR_BUILD_VERSION)-$(APPVEYOR_REPO_BRANCH)-$(EDITION)
+  type: zip
 
 deploy:
   provider: GitHub
   auth_token:
     secure: DlRS0U90AATbPkzxigCLwaGe1vguHFeC3a0YhMZRA/OYEbLQ8+ybp2OGfqgwpbW4
-  artifact: whip-dotnet-client-$(APPVEYOR_BUILD_VERSION)-$(APPVEYOR_REPO_BRANCH)-$(EDITION)
+  artifact: whip-dotnet-client-$(APPVEYOR_BUILD_VERSION)-$(APPVEYOR_REPO_BRANCH)-$(EDITION), whip-utils-$(APPVEYOR_BUILD_VERSION)-$(APPVEYOR_REPO_BRANCH)-$(EDITION)
   draft: true
   prerelease: false
   on:
