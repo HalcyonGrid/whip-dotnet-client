@@ -61,8 +61,8 @@ for:
 
 after_build:
 - ps: Set-Location "$env:APPVEYOR_BUILD_FOLDER"
-- ps: Rename-Item -Path bin -NewName whip-dotnet-client-$(APPVEYOR_BUILD_VERSION)-$(APPVEYOR_REPO_BRANCH)-$(EDITION)
-- ps: Rename-Item -Path utilbin -NewName whip-utils-$(APPVEYOR_BUILD_VERSION)-$(APPVEYOR_REPO_BRANCH)-$(EDITION)
+- ps: Rename-Item -Path bin -NewName whip-dotnet-client-$env:APPVEYOR_BUILD_VERSION-$env:APPVEYOR_REPO_BRANCH-$env:EDITION
+- ps: Rename-Item -Path utilbin -NewName whip-utils-$env:APPVEYOR_BUILD_VERSION-$env:APPVEYOR_REPO_BRANCH-$env:EDITION
 
 # No tests for now.
 test: off
