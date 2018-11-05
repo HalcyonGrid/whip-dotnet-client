@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2048
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Halcyon.Whip.Client", "Source\whip-dotnet-client\Halcyon.Whip.Client.csproj", "{D77BEB25-D3D4-4EC8-B00F-C1A9EA9F1EE1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "whipclone", "Source\whipclone\whipclone.csproj", "{04295CBD-FBF5-4C9D-90C3-FEC94D2ACB0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "whipstress", "Source\whipstress\whipstress.csproj", "{F349A920-759F-412C-8ED7-F7D3DB4D609D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4D01C3F8-A3E1-422C-B4F2-6FE040AA71CE}"
+	ProjectSection(SolutionItems) = preProject
+		.appveyor.yml = .appveyor.yml
+		.gitignore = .gitignore
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D77BEB25-D3D4-4EC8-B00F-C1A9EA9F1EE1}.Debug|x64.ActiveCfg = Debug|x64
+		{D77BEB25-D3D4-4EC8-B00F-C1A9EA9F1EE1}.Debug|x64.Build.0 = Debug|x64
+		{D77BEB25-D3D4-4EC8-B00F-C1A9EA9F1EE1}.Release|x64.ActiveCfg = Release|x64
+		{D77BEB25-D3D4-4EC8-B00F-C1A9EA9F1EE1}.Release|x64.Build.0 = Release|x64
+		{04295CBD-FBF5-4C9D-90C3-FEC94D2ACB0B}.Debug|x64.ActiveCfg = Debug|x64
+		{04295CBD-FBF5-4C9D-90C3-FEC94D2ACB0B}.Debug|x64.Build.0 = Debug|x64
+		{04295CBD-FBF5-4C9D-90C3-FEC94D2ACB0B}.Release|x64.ActiveCfg = Release|x64
+		{04295CBD-FBF5-4C9D-90C3-FEC94D2ACB0B}.Release|x64.Build.0 = Release|x64
+		{F349A920-759F-412C-8ED7-F7D3DB4D609D}.Debug|x64.ActiveCfg = Debug|x64
+		{F349A920-759F-412C-8ED7-F7D3DB4D609D}.Debug|x64.Build.0 = Debug|x64
+		{F349A920-759F-412C-8ED7-F7D3DB4D609D}.Release|x64.ActiveCfg = Release|x64
+		{F349A920-759F-412C-8ED7-F7D3DB4D609D}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F202DCC0-8E0B-4AE2-9014-1F73953ECBDD}
+	EndGlobalSection
+EndGlobal

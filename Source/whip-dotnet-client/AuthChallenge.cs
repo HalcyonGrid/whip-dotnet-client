@@ -4,7 +4,7 @@ using System.Text;
 using System.Net.Sockets;
 using System.IO;
 
-namespace InWorldz.Whip.Client
+namespace Halcyon.Whip.Client
 {
     public class AuthChallenge
     {

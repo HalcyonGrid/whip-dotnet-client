@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Net;
 
-namespace InWorldz.Whip.Client
+namespace Halcyon.Whip.Client
 {
     public class Util
     {

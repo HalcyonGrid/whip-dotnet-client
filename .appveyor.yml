@@ -4,18 +4,24 @@ init:
 - ps: Write-Host "Setting version to '$env:TAG_VERSION'"
 - ps: Update-AppveyorBuild -Version "$env:TAG_VERSION"
 
-image: Visual Studio 2017
+image:
+- Visual Studio 2017
+- Ubuntu
 
 configuration: Release
 
+platform:
+- x64
+
 pull_requests:
-  do_not_increment_build_number: true
+  do_not_increment_build_number: false
 
 nuget:
   disable_publish_on_pr: true
 
 skip_commits:
   files:
+  - doc/*
   - .gitignore
   - LICENSE
   - README.md
@@ -31,19 +37,50 @@ assembly_info:
   assembly_informational_version: '{version}'
 
 before_build:
-- nuget restore client.sln
+- ps: |
+    if ($isLinux) {
+      $env:EDITION = "mono"
+    } else {
+      $env:EDITION = "dotnet"
+    }
+- nuget restore Whip-Dotnet-Client.sln
 
 build:
-  project: client.sln
+  project: Whip-Dotnet-Client.sln
   parallel: true
   verbosity: minimal
   publish_nuget: true
   publish_nuget_symbols: false
+for:
+-
+  matrix:
+    only:
+    - image: Ubuntu
+  build_script:
+  - msbuild Whip-Dotnet-Client.sln
+
+after_build:
+- ps: Set-Location "$env:APPVEYOR_BUILD_FOLDER"
+- ps: Rename-Item -Path bin -NewName whip-dotnet-client-$env:APPVEYOR_BUILD_VERSION-$env:APPVEYOR_REPO_BRANCH-$env:EDITION
+- ps: Rename-Item -Path utilbin -NewName whip-utils-$env:APPVEYOR_BUILD_VERSION-$env:APPVEYOR_REPO_BRANCH-$env:EDITION
 
 # No tests for now.
 test: off
 
 artifacts:
-- path: client\bin\$(configuration)\InWorldz.Whip.Client.dll
-  name: InWorldz.Whip.Client
+- path: whip-dotnet-client-$(APPVEYOR_BUILD_VERSION)-$(APPVEYOR_REPO_BRANCH)-$(EDITION)
+  name: whip-dotnet-client-$(APPVEYOR_BUILD_VERSION)-$(APPVEYOR_REPO_BRANCH)-$(EDITION)
   type: zip
+- path: whip-utils-$(APPVEYOR_BUILD_VERSION)-$(APPVEYOR_REPO_BRANCH)-$(EDITION)
+  name: whip-utils-$(APPVEYOR_BUILD_VERSION)-$(APPVEYOR_REPO_BRANCH)-$(EDITION)
+  type: zip
+
+deploy:
+  provider: GitHub
+  auth_token:
+    secure: DlRS0U90AATbPkzxigCLwaGe1vguHFeC3a0YhMZRA/OYEbLQ8+ybp2OGfqgwpbW4
+  artifact: whip-dotnet-client-$(APPVEYOR_BUILD_VERSION)-$(APPVEYOR_REPO_BRANCH)-$(EDITION), whip-utils-$(APPVEYOR_BUILD_VERSION)-$(APPVEYOR_REPO_BRANCH)-$(EDITION)
+  draft: true
+  prerelease: false
+  on:
+    APPVEYOR_REPO_TAG: true

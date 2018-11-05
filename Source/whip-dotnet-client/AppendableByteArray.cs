@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Net.Sockets;
 
-namespace InWorldz.Whip.Client
+namespace Halcyon.Whip.Client
 {
     /// <summary>
     /// Holds a fixed sized array and keeps tract of an insert position.  Class created to prevent
@@ -96,7 +96,8 @@ namespace InWorldz.Whip.Client
             while (soFar < size)
             {
                 int szRead = conn.Receive(this.data, _insertPos, size - soFar, SocketFlags.None);
-                if (szRead == 0) throw new AssetServerError("Server disconnect during receive");
+                if (szRead == 0)
+                    throw new AssetServerError("Server disconnect during receive");
 
                 soFar += szRead;
                 _insertPos += szRead;
