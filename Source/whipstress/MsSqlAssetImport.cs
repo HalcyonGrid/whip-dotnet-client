@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Data.SqlClient;
 using System.Data;
-using InWorldz.Whip.Client;
+using Halcyon.Whip.Client;
 using System.IO;
 
 namespace whipstress

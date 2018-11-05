@@ -85,9 +85,9 @@
     <Compile Include="ThreadTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\whip-dotnet-client\InWorldz.Whip.Client.csproj">
+    <ProjectReference Include="..\whip-dotnet-client\Halcyon.Whip.Client.csproj">
       <Project>{D77BEB25-D3D4-4EC8-B00F-C1A9EA9F1EE1}</Project>
-      <Name>InWorldz.Whip.Client</Name>
+      <Name>Halcyon.Whip.Client</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

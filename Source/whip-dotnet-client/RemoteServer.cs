@@ -4,7 +4,7 @@ using System.Text;
 using System.Net.Sockets;
 using System.Threading;
 
-namespace InWorldz.Whip.Client
+namespace Halcyon.Whip.Client
 {
     public delegate void AsyncAssetCallback(Asset asset, AssetServerError error);
 
@@ -294,7 +294,9 @@ namespace InWorldz.Whip.Client
             const int BUF_SZ = 65536;
             _conn = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp) {
                 ReceiveBufferSize = BUF_SZ,
+                ReceiveTimeout = 10000,
                 SendBufferSize = BUF_SZ,
+                SendTimeout = 10000,
             };
 
             //establish a socket connection

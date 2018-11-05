@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Security.Cryptography;
-using InWorldz.Whip.Client;
+using Halcyon.Whip.Client;
 
 namespace whipstress
 {

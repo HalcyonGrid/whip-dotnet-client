@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Net.Sockets;
 
-namespace InWorldz.Whip.Client
+namespace Halcyon.Whip.Client
 {
     /// <summary>
     /// Holds a fixed sized array and keeps tract of an insert position.  Class created to prevent

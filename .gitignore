@@ -210,47 +210,9 @@ compile.bat
 *.maddin
 *.data
 *.plx
-bin/estate_settings.xml
-bin/hacd_hulls.cache.db3
-bin/Halcyon.vshost.exe.manifest
-bin/Halcyon.vshost.exe.config
-bin/trustednetworks.txt
-bin/addin-db-001/
-bin/addin-db-002/
-bin/ScriptEngines/Phlox/states/script_states.db3
-bin/assets/AssetSets.xml.loaded
-
-# Other files that need to be created per-installation
-bin/Halcyon.ini
-bin/aperture.cfg
-bin/GridServer_Config.xml
-bin/MessagingServer_Config.xml
-bin/UserServer_Config.xml
-bin/Regions
-
-# Other testing folder ignores 
-bin/*.dll
-bin/Halcyon.exe
-bin/Halcyon.vshost.exe
-bin/OpenSim.Grid.UserServer.exe
-bin/OpenSim.Grid.GridServer.exe
-bin/OpenSim.Grid.MessagingServer.exe
-bin/OpenSim.TestSuite.exe
-bin/Physics/InWorldz.PhysxPhysics.dll
-bin/Physics/OpenSim.Region.Physics.BasicPhysicsPlugin.dll
-bin/Physics/OpenSim.Region.Physics.Meshing.dll
-bin/Terrain/OpenSim.Region.CoreModules.World.Terrain.DefaultEffects.dll
-bin/crashes
-bin/Grid
-bin/GridLogin
-bin2
-bin3
-bin4
 
 #Other ignores
 *.oar
-bin/blacklist.old
-bin/blacklist.txt
 
 whipclone/docs
 whipstress/docs

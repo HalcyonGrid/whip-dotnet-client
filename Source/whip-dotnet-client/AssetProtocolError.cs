@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace InWorldz.Whip.Client
+namespace Halcyon.Whip.Client
 {
     public class AssetProtocolError : Exception
     {
