@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace InWorldz.Whip.Client
+namespace Halcyon.Whip.Client
 {
     /// <summary>
     /// An asset sent from the asset server

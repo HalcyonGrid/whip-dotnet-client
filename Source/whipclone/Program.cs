@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using InWorldz.Whip.Client;
+using Halcyon.Whip.Client;
 using System.IO;
 using System.Data.SQLite;
 using System.Threading;

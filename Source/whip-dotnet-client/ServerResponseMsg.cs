@@ -4,7 +4,7 @@ using System.Text;
 using System.Net.Sockets;
 
 
-namespace InWorldz.Whip.Client
+namespace Halcyon.Whip.Client
 {
     /// <summary>
     /// The server's response to a request

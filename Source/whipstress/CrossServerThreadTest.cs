@@ -4,36 +4,34 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Security.Cryptography;
-using InWorldz.Whip.Client;
+using Halcyon.Whip.Client;
 
 namespace whipstress
 {
-    class CrossServerBiasTest3
+    class CrossServerThreadTest
     {
         private Dictionary<string, byte[]> _existingAssets = new Dictionary<string, byte[]>();
         private List<string> _assetUuids = new List<string>();
         private RemoteServer _server1;
-        private RemoteServer[] _server2;
-        private RemoteServer _server3;
+        private RemoteServer _server2;
 
         private int _asyncReadReturns = 0;
         private int _asyncReadSends = 0;
 
         Random serverSelect = new Random();
 
-        public CrossServerBiasTest3(RemoteServer server1, RemoteServer[] server2, RemoteServer server3)
+        public CrossServerThreadTest(RemoteServer server1, RemoteServer server2)
         {
             _server1 = server1;
             _server2 = server2;
-            _server3 = server3;
 
             //setup the test by adding 200 shared assets
-            Console.WriteLine("Putting 200 random assets to server1");
+            Console.WriteLine("Putting 100 random assets to server1");
             Console.WriteLine(DateTime.Now);
             SHA1 sha = new SHA1CryptoServiceProvider();
 
 
-            for (int i = 0; i < 200; i++)
+            for (int i = 0; i < 100; i++)
             {
                 string uuidstr = OpenMetaverse.UUID.Random().ToString();
                 byte[] randomBytes = TestUtil.RandomBytes();
@@ -48,22 +46,21 @@ namespace whipstress
 
             Console.WriteLine("Done: " + DateTime.Now);
 
-            Console.WriteLine("Putting 10 random assets to server2");
+            Console.WriteLine("Putting 100 random assets to server2");
             Console.WriteLine(DateTime.Now);
 
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 100; i++)
             {
                 string uuidstr = OpenMetaverse.UUID.Random().ToString();
-                byte[] randomBytes = TestUtil.RandomBytes(1000, 50000);
+                byte[] randomBytes = TestUtil.RandomBytes();
                 byte[] challengeHash = sha.ComputeHash(randomBytes);
                 _assetUuids.Add(uuidstr);
                 _existingAssets.Add(uuidstr, challengeHash);
 
                 Asset asset = new Asset(uuidstr, 1,
                     false, false, 0, "Random Asset", "Radom Asset Desc", randomBytes);
-                _server2[0].PutAsset(asset);
-                _server3.PutAsset(asset);
+                _server2.PutAsset(asset);
             }
 
             Console.WriteLine("Done: " + DateTime.Now);
@@ -71,10 +68,10 @@ namespace whipstress
 
         public void Start()
         {
-            Console.WriteLine("Starting 30 test threads");
+            Console.WriteLine("Starting 50 test threads");
             Thread t;
 
-            for (int i = 0; i < 30; i++)
+            for (int i = 0; i < 50; i++)
             {
                 t = new Thread(new ParameterizedThreadStart(ThreadProc));
                 t.Start(i);
@@ -85,15 +82,15 @@ namespace whipstress
         {
             lock (serverSelect)
             {
-                int which = serverSelect.Next(11);
+                int which = serverSelect.Next(2);
 
-                if (which == 0 || which < 10)
+                if (which == 0)
                 {
-                    return _server2[which];
+                    return _server1;
                 }
                 else
                 {
-                    return _server3;
+                    return _server2;
                 }
             }
         }
@@ -108,14 +105,6 @@ namespace whipstress
 
             
             RandomServer().PutAsset(asset);
-
-            lock (_existingAssets)
-            {
-                SHA1 sha = new SHA1CryptoServiceProvider();
-                byte[] challengeHash = sha.ComputeHash(randomBytes);
-                _assetUuids.Add(uuidstr);
-                _existingAssets.Add(uuidstr, challengeHash);
-            }
         }
 
         public void SingleAsyncRead(Random random)
@@ -124,7 +113,7 @@ namespace whipstress
             {
                 _asyncReadSends++;
             }
-            if (random.NextDouble() > 0.5)
+            if (random.NextDouble() > 0.90)
             {
                 //read a non existant asset
                 RandomServer().GetAssetAsync("00000000000000000000000000000000",
@@ -146,17 +135,12 @@ namespace whipstress
             }
             else
             {
-                string reqUuid;
-                lock (_existingAssets)
-                {
-                    //read an existing asset
-                    int index = (int)Math.Floor(_assetUuids.Count * random.NextDouble());
-                    reqUuid = _assetUuids[index];
-                }
-
-                RandomServer().GetAssetAsync(reqUuid,
+                //read an existing asset
+                int index = (int)Math.Floor(_assetUuids.Count * random.NextDouble());
+                RandomServer().GetAssetAsync(_assetUuids[index],
                     delegate(Asset asset, AssetServerError e)
                     {
+
                         if (e != null)
                         {
                             Console.WriteLine("Async read expected no error, but error caught! " + e.ToString());
@@ -179,12 +163,12 @@ namespace whipstress
             int threadIdx = (int)obj;
             Random random = new Random();
 
-            //run 200,000 iterations of reads and writes
-            for (int i = 0; i < 200000; i++)
+            //run 20,000 iterations of reads and writes
+            for (int i = 0; i < 20000; i++)
             {
                 if (i % 100 == 0) Console.WriteLine("Thread " + threadIdx + " is making progress " + i);
 
-                if (random.NextDouble() > 0.9999)
+                if (random.NextDouble() > 0.95)
                 {
                     this.SingleWrite();
                     this.SingleAsyncRead(random);
@@ -193,31 +177,19 @@ namespace whipstress
                 {
                     SHA1 sha = new SHA1CryptoServiceProvider();
 
-                    string reqUuid;
-                    byte[] existingHash;
-                    lock (_existingAssets)
+                    //read an existing asset and check the data hash
+                    int index = (int)Math.Floor(_assetUuids.Count * random.NextDouble());
+
+                    Asset a = RandomServer().GetAsset(_assetUuids[index]);
+                    byte[] hash = sha.ComputeHash(a.Data);
+                    if (!TestUtil.Test.test(hash, _existingAssets[_assetUuids[index]]))
                     {
-                        //read an existing asset
-                        int index = (int)Math.Floor(_assetUuids.Count * random.NextDouble());
-                        reqUuid = _assetUuids[index];
-                        existingHash = _existingAssets[reqUuid];
-                    }
+                        Console.WriteLine("Mismatched hash on " + _assetUuids[index]);
+                        Console.WriteLine("Got " + Util.HashToHex(hash) + " expected " + Util.HashToHex(_existingAssets[_assetUuids[index]]));
 
-                    Asset a = RandomServer().GetAsset(reqUuid);
+                        ASCIIEncoding encoding = new ASCIIEncoding();
 
-                    //only test 5mb or less.  this is to try and trigger specific code in the server
-                    if (a.Data.Length < 5000000)
-                    {
-                        byte[] hash = sha.ComputeHash(a.Data);
-                        if (!TestUtil.Test.test(hash, existingHash))
-                        {
-                            Console.WriteLine("Mismatched hash on " + reqUuid);
-                            Console.WriteLine("Got " + Util.HashToHex(hash) + " expected " + Util.HashToHex(existingHash));
-
-                            ASCIIEncoding encoding = new ASCIIEncoding();
-
-                            Console.WriteLine("Data " + encoding.GetString(a.Data));
-                        }
+                        Console.WriteLine("Data " + encoding.GetString(a.Data));
                     }
                 }
             }
